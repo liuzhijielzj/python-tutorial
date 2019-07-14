@@ -1,0 +1,7 @@
+1. 中文编码问题
+    python 2.0+默认是ascii码，请添加以下代码：
+    #!/usr/bin/python
+    # -*- coding: UTF-8 -*-
+
+    python 3.0+默认是utf-8编码
+2.
