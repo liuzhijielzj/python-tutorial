@@ -32,3 +32,15 @@ print(s1 | s2) #并集
 └───┘                  └───────┘
 所以，对于不变对象来说，调用对象自身的任意方法，也不会改变该对象自身的内容。相反，这些方法会创建新的对象并返回，这样，就保证了不可变对象本身永远是不可变的。
 '''
+
+some_list = ['a', 'b', 'c', 'b', 'd', 'm', 'n', 'n']
+duplicates = set([x for x in some_list if some_list.count(x) > 1])
+print(duplicates)
+
+valid = set(['yellow', 'red', 'blue', 'green', 'black'])
+input_set = set(['red', 'brown'])
+print(input_set.intersection(valid))
+print(input_set & valid)
+
+print(input_set.difference(valid))
+print(input_set - valid)

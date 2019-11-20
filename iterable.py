@@ -26,3 +26,8 @@ print(findMaxAndMin([1, 3, 2, 5, 3, 7, 3, 8, 9, 134., 2, -1]))
 
 for x, y in [(1, 1), (2, 4), (3, 9)]:
     print(x, y)
+
+my_string = "Yasoob"
+next(iter(my_string)) # iter根据一个可迭代对象返回一个迭代器对象
+for s in my_string:
+    print(s)

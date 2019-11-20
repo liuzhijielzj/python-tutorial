@@ -1,6 +1,14 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
+d = {
+    'Adam': 95,
+    'Lisa': 85,
+    'Bart': 59
+}
+if 'Bart' in d:
+    print(d['Bart'])
+
 # dictionary
 dict = {}
 dict['one'] = "This is one"

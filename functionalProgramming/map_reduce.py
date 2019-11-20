@@ -1,9 +1,12 @@
+from collections.abc import Iterable, Iterator
 def f(x):
     return x * x
-
-r = map(f, [1, 2, 3, 4, 5])
+r = map(f, [1, 2, 3, 4, 5]) #Iterable, Iterator
+print(isinstance(r, Iterator))
+print(isinstance(r, Iterable))
 print(list(r))
-# r是一个Iterator，Iterator是惰性序列，因此通过list()函数让它把整个序列都计算出来并返回一个list
+# r是一个Iterator，Iterator是惰性序列，
+# 因此通过list()函数让它把整个序列都计算出来并返回一个list
 
 print(list(map(str, [1, 2, 3, 4, 5, 6, 7, 8, 9])))
 

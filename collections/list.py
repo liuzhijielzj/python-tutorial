@@ -6,6 +6,7 @@ list1 = [ 'runoob', 786 , 2.23, 'john', 70.2 ] # contains different data
 tinylist = [123, 'john']
 #加号 + 是列表连接运算符，星号 * 是重复操作
 print(list1)
+print(list1[::2]) # 2 is step
 print(list1[0])
 print(list1[:2])
 print(list1[0:3])
@@ -65,3 +66,6 @@ print(nums[::2])
 
 print('ABCDEFG'[:3])
 
+L = ['Adam', 'Lisa', 'Bart', 'Paul']
+for index, name in zip(range(1,len(L)+1),L):
+    print(index, '-', name)

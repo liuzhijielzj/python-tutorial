@@ -1,4 +1,4 @@
-'''函数名其实就是指向一个函数对象的引用，完全可以把函数名赋给一个变量，相当于给这个函数起了一个“别名”'''
+'''函数名其实就是指向一个函数对象的引用，完全可以把函数名赋给一个变量，相当于给这个函数起了一个别名'''
 a = abs
 print(abs(3.5))
 
@@ -10,11 +10,21 @@ def my_abs(x):
     if not isinstance(x, (int, float)):
         raise TypeError()
 
+
+def hanno(n, a, b, c):
+    if 1 == n:
+        print(a, '-->', c)
+        return
+    hanno(n - 1, a, c, b)
+    print(a, '-->', c)
+    hanno(n - 1, b, a, c)
+hanno(4, 'A', 'B', 'C')
+
 import math
 
 '''
-返回多个值
-返回值是一个tuple！但是，在语法上，返回一个tuple可以省略括号，而多个变量可以同时接收一个tuple，按位置赋给对应的值
+返回多个值,返回值是一个tuple！
+但是，在语法上，返回一个tuple可以省略括号，而多个变量可以同时接收一个tuple，按位置赋给对应的值
 '''
 def move(x, y, step, angle=0):
     nx = x + step * math.cos(angle)
@@ -33,6 +43,7 @@ print(quadratic(4, 15, 2))
 
 
 '''
+
 Python函数在定义的时候，默认参数L的值就被计算出来了，即[]，因为默认参数L也是一个变量，它指向对象[]，
 每次调用该函数，如果改变了L的内容，则下次调用时，默认参数的内容就变了，不再是函数定义时的[]了。
 定义默认参数要牢记一点：默认参数必须指向不变对象！
@@ -45,6 +56,7 @@ def add_end(L=[]):
 print(add_end())
 print(add_end())
 print(add_end())
+print(add_end(['a', 'b']))
 
 '''
 可变参数函数
@@ -57,7 +69,7 @@ def calc(*numbers):
 print(calc())
 print(calc(1, 2, 3))
 nums = [1, 2, 3, 4]
-print(calc(*nums))
+print(calc(*nums)) # list变成可变参数
 
 '''
 关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict
@@ -111,17 +123,18 @@ f2(1, 2, d=99, ext=None)
 最神奇的是通过一个tuple和dict，你也可以调用上述函数
 对于任意函数，都可以通过类似func(*args, **kw)的形式调用它，无论它的参数是如何定义的
 '''
-args = (1, 2, 3)
+args = (1, 2, 3, 4)
 kw = {'d': 99, 'x': '#'}
+#在函数匹配参数时，会先展开tuple，对必须参数和默认参数先进行匹配，剩下的作为可选参数。
 f1(*args, **kw)
 
-
 '''
-解决递归调用栈溢出的方法是通过尾递归优化，事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。
-尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。这样，编译器或者解释器就可以把尾递归做优化，
+解决递归调用栈溢出的方法是通过尾递归优化，
+事实上尾递归和循环的效果是一样的，所以，把循环看成是一种特殊的尾递归函数也是可以的。
+尾递归是指，在函数返回的时候，调用自身本身，并且，return语句不能包含表达式。
+这样，编译器或者解释器就可以把尾递归做优化，
 使递归本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出的情况。
 '''
-
 
 def fact(n):
     return fact_iter(n, 1)
@@ -146,8 +159,8 @@ def describe_pet(pet_name, animal_type = 'dog'):
     print("My " + animal_type + "'s name is " + pet_name.title() + ".")
 
 describe_pet('harry', 'hamster', ) # positional argument
+# 此处，我们用命名关键字传递参数时，不要求按定义时的顺序传递。
 describe_pet(animal_type='hamster', pet_name='harry') # keyword argument
-
 describe_pet('harry') # default value
 
 def makePizza(*topping):
@@ -176,3 +189,21 @@ user_profile = build_profile('albert', 'einstein', location='princeton', field='
 print(user_profile)
 user_profile = build_profile('albert', 'einstein', user_info = {'location' : 'princeton', 'field' : 'physics'})
 print(user_profile)
+
+def test_args_kwargs(arg1, arg2, arg3):
+    print("arg1:", arg1)
+    print("arg2:", arg2)
+    print("arg3:", arg3)
+args = ("two", 3, 5)
+test_args_kwargs(*args)
+kwargs = {"arg3": 3, "arg2": "two", "arg1": 5}
+test_args_kwargs(**kwargs)
+
+# filter
+number_list = range(-5, 5)
+less_than_zero = filter(lambda x: x < 0, number_list)
+print(list(less_than_zero))  
+
+# reduce
+from functools import reduce
+product = reduce( (lambda x, y: x * y), [1, 2, 3, 4] )

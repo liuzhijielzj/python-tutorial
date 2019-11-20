@@ -23,6 +23,9 @@ tz_utc_8 = timezone(timedelta(hours=8)) # 创建时区UTC+8:00
 dt = now.replace(tzinfo=tz_utc_8) # 强制设置为UTC+8:00
 print(datetime(2015, 5, 18, 17, 2, 10, 871012, tzinfo=timezone(timedelta(0, 28800))))
 
+from datetime import datetime
+print('Hour is ' + str(datetime.now().hour))
+
 
 
 

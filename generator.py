@@ -1,5 +1,6 @@
 # 把一个列表生成式的[]改成()，就创建了一个generator
 g = (x * x for x in range(10))
+print(type(g))
 print(next(g))
 print(next(g))
 print(next(g))
@@ -16,6 +17,7 @@ def fib(max):
     n, a, b = 0, 0, 1
     while n < max:
         yield b
+        print('after yield')
         a, b = b, a + b
         n = n + 1
     return 'done'

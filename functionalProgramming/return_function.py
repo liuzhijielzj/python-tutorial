@@ -62,3 +62,31 @@ print(f3())
 
 abs1 = abs
 print(abs1.__name__)
+
+from functools import reduce
+def calc_prod(lst):
+    def lazy_prod():
+        return reduce(lambda x, y: x * y, lst, 1) # third parameter is the initial value of the result
+    return lazy_prod
+f = calc_prod(range(1, 5))
+print(f())
+
+# 要正确使用闭包，就要确保引用的局部变量在函数返回后不能变。
+# 希望一次返回3个函数，分别计算1x1,2x2,3x3:
+def count():
+    fs = []
+    for i in range(1, 4):
+        # def f(n):
+        #     return lambda: n * n
+        # fs.append(f(i))
+        def f():
+            return i * i
+        fs.append(f)
+    return fs
+
+f1, f2, f3 = count()
+print(f1(), f2(), f3())
+
+# anonymous function has only one statement
+myabs = lambda x: -x if x < 0 else x
+

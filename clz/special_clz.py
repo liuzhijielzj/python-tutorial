@@ -95,3 +95,70 @@ class Fib(object):
             return L
 
 
+# 要让 len() 函数工作正常，类必须提供一个特殊方法__len__()，它返回元素的个数
+class Students(object):
+    def __init__(self, *args):
+        self.names = args
+    def __len__(self):
+        return len(self.names)
+ss = Students('Bob', 'Alice', 'Tim')
+print(len(ss))
+
+'''
+斐波那契数列是由 0, 1, 1, 2, 3, 5, 8…构成。
+请编写一个Fib类，Fib(10)表示数列的前10个元素，print Fib(10) 
+可以打印出数列的前 10 个元素，len(Fib(10))可以正确返回数列的个数10。
+'''
+class Fib(object):
+    def __init__(self, num):
+        a, b, L = 0, 1, []
+        for n in range(num):
+            L.append(a)
+            a, b = b, a + b
+        self.numbers = L
+
+    def __str__(self):
+        return str(self.numbers)
+
+    __repr__ = __str__
+
+    def __len__(self):
+        return len(self.numbers)
+
+def gcd(a, b):
+    if b == 0:
+        return a
+    return gcd(b, a % b)
+
+'''
+p、q 都是整数，表示有理数 p/q。
+'''
+class Rational(object):
+    def __init__(self, p, q):
+        self.p = p
+        self.q = q
+    # 定义加法运算
+    def __add__(self, r):
+        return Rational(self.p * r.q + self.q * r.p, self.q * r.q)
+    def __sub__(self, r):
+        return Rational(self.p * r.q - self.q * r.p, self.q * r.q)
+    def __mul__(self, r):
+        return Rational(self.p * r.p, self.q * r.q)
+    def __div__(self, r):
+        return Rational(self.p * r.q, self.q * r.p)
+
+    # 类型转换为int
+    def __int__(self):
+        return self.p // self.q
+    def __float__(self):
+        return 1.0 * self.p / self.q
+    def __str__(self):
+        g = gcd(self.p, self.q)
+        return '%s/%s' % (self.p / g, self.q / g)
+    __repr__ = __str__
+
+r1 = Rational(1, 2)
+r2 = Rational(1, 4)
+print(r1 + r2)
+print(int(r1))
+

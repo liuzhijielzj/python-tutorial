@@ -66,3 +66,37 @@ class ElectricCar(Car):
 
         super().__init__(make, model, year)
         self.battery = Battery()
+
+class Person(object):
+    '''
+    接受任意关键字参数.
+    通过 setattr(self, ‘name’, ‘xxx’) 设置属性.
+    '''
+    def __init__(self, name, gender, birth, **kw):
+        self.name = name
+        self.gender = gender
+        self.birth = birth
+        for k, v in kw.items():
+            setattr(self, k, v)
+xiaoming = Person('Xiao Ming', 'Male', '1990-1-1', job='Student')
+print(xiaoming.name)
+print(xiaoming.job)
+
+
+'''
+如果一个属性以"__xxx__"的形式定义，那它又可以被外部访问了，
+以"__xxx__"定义的属性在Python的类中被称为特殊属性，
+有很多预定义的特殊属性可以使用，通常我们不要把普通属性用"__xxx__"定义。
+'''
+class Person(object):
+    def __init__(self, name):
+        self.name = name
+        self._title = 'Mr'
+        self.__job = 'Student'
+p = Person('Bob')
+print(p.name)
+# => Bob
+# 以单下划线开头的属性"_xxx"虽然也可以被外部访问，但是，按照习惯，他们不应该被外部访问。
+print(p._title)
+# => Mr
+print(p.__job)
